@@ -1,0 +1,10 @@
+[Unit]
+Description=Pi Light monitoring and controller service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /var/pi_server.py
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target
