@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Lighting system status</title>
+    </head>
+    <body>
+        <h1>Lighting system current status:</h1>
+        {% if data["light"] %}
+        Light is on<br>
+        {% else %}
+        Light is off<br>
+        {% endif %}
+        Brightness: {{data["lux"]}} Lux<br>
+        Color temperature: {{data["temp"]}}K
+        <form method="POST" action="/light_setting">
+            <input type="radio" id="light_on" name="light_setting" value="on">
+            <label for="light_on">On</label><br>
+            <input type="radio" id="light_off" name="light_setting" value="off">
+            <label for="light_off">Off</label><br>
+            <input type="radio" id="light_auto" name="light_setting" value="auto">
+            <label for="light_on">Auto</label><br>
+            <input type="submit" value="Submit">
+        </form>
+        <iframe src="/graph" width="1000" height="800" style="border: 0;"></iframe>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+    <meta http-equiv="refresh" content="5" />
+    <head>
+        <title>Lighting levels over time</title>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    </head>
+    <body>
+        <h2>Light levels over time (Lux):</h2>
+        <canvas id="chart" width="800", height="600"></canvas>
+        <script>
+            var data = {
+                labels : [
+                    {% for i in range(length) %}
+                        {{ i }},
+                    {% endfor %}
+                ],
+
+                datasets : [{
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    bezierCurve : false,
+                    data : [
+                        {% for value in data %}
+                            {{value}},
+                        {% endfor %}
+                    ]
+                }]
+            };
+            Chart.defaults.global.tooltipYPadding = 16;
+            Chart.defaults.global.tooltipCornerRadius = 0;
+            Chart.defaults.global.tooltipTitleFontStyle = "normal";
+            Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+            Chart.defaults.global.responsive = false;
+            Chart.defaults.global.scaleLineColor = "black";
+            Chart.defaults.global.scaleFontSize = 16;
+
+            var chart = document.getElementById("chart").getContext("2d");
+
+            steps = 10
+            var LineChart = new Chart(chart).Line(data, {
+                scaleShowVerticalLines: true,
+                scaleShowGridLines : true,
+                animation: false,
+            })
+        </script>
+    </body>
+</html>
